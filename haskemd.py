@@ -26,7 +26,7 @@ def emd(list1, list2):
     return haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size)))
 
 def haskemd(list1, list2, matrix):
-    subprocess.call(["stack", "exec", "EMD-exe",str(list1),str(list2),matrix])
+    subprocess.call(["sudo", "stack", "exec", "--allow-different-user", "EMD-exe",str(list1),str(list2),matrix])
     cleanup()
 
 def makemat(l):
