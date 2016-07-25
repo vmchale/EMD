@@ -1,0 +1,7 @@
+setup.py
+haskemd/__init__.py
+haskemd.egg-info/PKG-INFO
+haskemd.egg-info/SOURCES.txt
+haskemd.egg-info/dependency_links.txt
+haskemd.egg-info/not-zip-safe
+haskemd.egg-info/top_level.txt
