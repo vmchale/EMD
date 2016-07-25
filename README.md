@@ -1,5 +1,4 @@
 #EMD
-#EMD
 Earth mover's distance on Nvidia GPUS
 
 The provided python wrapper takes two numpy arrays and computes the EMD:
