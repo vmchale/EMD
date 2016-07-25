@@ -5,6 +5,11 @@ This provides a python wrapper to code which can be imported as haskemd. This is
 
 To test:
 
-```python3
+```
+python3
 >>>import haskemd
->>>haskemd.emd(haskemd.sinksrand, haskemd.sourcesrand)```
+>>>haskemd.emd(haskemd.sinksrand, haskemd.sourcesrand)
+```
+
+##Prereqs
+To install CUDA, download it directly from NVIDIA, along with the most up-to-date driver for your platform. 
