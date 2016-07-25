@@ -11,6 +11,11 @@ wget -qO- https://get.haskellstack.org/ | sh
 ```
 Then type `stack setup` followed by `stack build`
 
+Once this is done `cd` into `haskellemd` and run
+```
+sudo python3 setup.py install
+```
+
 ##Python
 The provided python wrapper takes two numpy arrays and computes the EMD:
 ```

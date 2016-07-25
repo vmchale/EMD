@@ -51,6 +51,7 @@ hammingDistance' k v powers = A.sum $ A.zipWith (\ x y -> (x==*y) ? (0,1)) ks vs
 oneAt :: Acc (Scalar Int) -> Exp Int -> Exp Int
 oneAt l = (\i -> ((the l) `mod` (2*i) >=* i ? (0,1)))
 
+-- | computes the hamming distance between two numbers, after converting them to binary
 hammingDistance :: Int -> Int -> Int
 hammingDistance a b = hammingListDistance as bs
     where as = Prelude.fst $ equalizeLength (intToBinary a) (intToBinary b)
@@ -82,6 +83,7 @@ generateMatrix a = A.fromList sh list :: Array DIM2 Int
     where sh = (Z:.a:.a) 
           list = [ hammingDistance n m | n <- [0..(a-1)], m <- [0..(a-1)]]
 
+-- | takes a list to an accelerate array
 toVect :: (Elt a) => [a] -> Acc (Array DIM1 a)
 toVect list = use (A.fromList sh list)
     where sh = (Z:.l)
