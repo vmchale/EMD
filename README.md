@@ -24,4 +24,16 @@ python3
 >>>haskemd.emd(haskemd.sinksrand(1024), haskemd.sourcesrand(1024))
 692959.0
 ```
-`sinksrand(1024)` and `sourcesrand(1024)` just generates test data with 
+`sinksrand(1024)` and `sourcesrand(1024)`just generates test data with 1024 bins. 
+
+To try your own, consider the following example:
+```
+>>>import haskemd
+>>>import numpy as np
+>>>a1 = np.array([1,2,3,4])
+>>>a2 = np.array([4,3,2,1])
+>>>haskemd(a1, a2)
+6.0
+```
+
+The 
