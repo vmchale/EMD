@@ -11,6 +11,8 @@ wget -qO- https://get.haskellstack.org/ | sh
 ```
 Then type `stack setup` followed by `stack build`
 
+Then run the script `start.sh`
+
 Once this is done `cd` into `haskellemd` and run
 ```
 sudo python3 setup.py install
