@@ -39,6 +39,7 @@ To try your own, consider the following example:
 >>>haskemd(a1, a2)
 6.0
 ```
+You might be prompted for the sudo password. This is because of a bug upstream in the code for Haskell Accelerate. 
 
 ##Ground distance
 In our case, the "ground distance" is the hamming distance. Moreover, the matrix for the metric is automatically generated. This means that an array like
