@@ -1,0 +1,4 @@
+- [ ] Allow haskemd to take in arrays of floats
+- [ ] Allow custom functions in matrix generation (not just hammingDistance)
+- [ ] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
+- [ ] Stop using imagemagick to convert python\'s bitmpas for Haskell\'s use

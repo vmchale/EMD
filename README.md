@@ -11,12 +11,14 @@ wget -qO- https://get.haskellstack.org/ | sh
 ```
 Then type `stack setup` followed by `stack build`
 
-Then run the script `start.sh`
+The script `start.sh` will create common points between python and haskell. 
 
 Once this is done `cd` into `haskellemd` and run
 ```
 sudo python3 setup.py install
 ```
+
+After this, the haskemd module can be used from any directory.
 
 ##Python
 The provided python wrapper takes two (one-dimensional) numpy arrays and computes the EMD:
