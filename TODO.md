@@ -1,6 +1,7 @@
-- [ ] Allow haskemd to take in arrays of floats
+- [x] Allow haskemd to take in arrays of floats
 - [ ] Allow custom functions in matrix generation (not just hammingDistance)
 - [ ] Document indices/auto-generated matrix relationship
 - [ ] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
 - [ ] Test on Mac (and Windows, though less important)
 - [ ] Stop using imagemagick to convert python's bitmaps for Haskell's use
+- [ ] Add paper on algorithm
