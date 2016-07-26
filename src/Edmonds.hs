@@ -33,7 +33,7 @@ exec = do
     let reduced = (liftM2 (liftM2 red)) (readImageFromBMP list1) (readImageFromBMP list2)
     let metric = readImageFromBMP metricname
     (let tl = (liftM2 (liftM2 takeLists')) in tl reduced metric >>= (return . show)) >>= putStrLn
-    putStrLn "finished."
+--    putStrLn "finished."
 
 -- | takes the first row of a two-dimensional matrix to a vector
 thevect :: (Elt a) => Acc (Array DIM2 a) -> Acc (Array DIM1 a)
@@ -45,7 +45,7 @@ red a b = run $ (A.zipWith (-) (A.map A.fromIntegral (thevect $ use a)) (A.map A
 
 -- | Provides starting values for computation. Outputs a string with the value.
 takeLists' :: Array DIM1 Int -> Array DIM2 Word32 -> String
-takeLists' reduced metric = show $ run $ calcEMD' graph x delta extra powers
+takeLists' reduced metric = show $ head $ A.toList $ run $ calcEMD' graph x delta extra powers
     where x = empty
           extra = lift (e, e) :: IndexList
           e = toVect []
