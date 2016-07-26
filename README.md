@@ -22,5 +22,6 @@ The provided python wrapper takes two numpy arrays and computes the EMD:
 python3
 >>>import haskemd
 >>>haskemd.emd(haskemd.sinksrand(), haskemd.sourcesrand())
+692959.0
 ```
 
