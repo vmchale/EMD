@@ -9,7 +9,7 @@ To build, you must install stack with
 ```
 wget -qO- https://get.haskellstack.org/ | sh
 ```
-Then type `stack setup` followed by `stack build`
+Then type `stack setup` followed by `stack build` in the directory EMD/
 
 The script `start.sh` will create common points between python and haskell. If the script does not work on your platform, download imagemagick for your platform and create an environment variable `HASKPATH` with with the path to `EMD/` e.g. `HASKPATH=/home/username/EMD/`
 
@@ -45,7 +45,7 @@ In our case, the "ground distance" is the hamming distance. Moreover, the matrix
 ```
 np.array([0.25,0.5])
 ```
-must have the correct values in the correct places. In fact, d<sub>ij</sub> is based on the indices. Here, d<sub>01</sub> would mean the distance between the bin containing 0.25 and the bin containing 0.5. In general, we have d<sub>ij</sub>=hammingDistance i j
+must have the correct values in the correct places. d<sub>ij</sub> is based on the indices. Here, d<sub>01</sub> would mean the distance between the bin containing 0.25 and the bin containing 0.5. In general, we have d<sub>ij</sub>=hammingDistance i j
 
 ##Hamming distance
 To get the hamming distance from a integer indices, say 3 and 7, we first convert to binary to get 011 and 111. Then we can compute the hamming distance to get 1 (in this case). Hence d<sub>37</sub>=1
