@@ -7,3 +7,4 @@
 - [ ] Write documentation on windows setup (and imagemagick for Mac)
 - [ ] Stop using imagemagick to convert python's bitmaps for Haskell's use
 - [ ] Add paper on algorithm
+- [ ] Figure out difference between my computed value and theirs
