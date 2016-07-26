@@ -3,5 +3,6 @@
 - [ ] Document indices/auto-generated matrix relationship
 - [ ] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
 - [ ] Test on Mac (and Windows, though less important)
+- [ ] Write documentation on windows setup (and imagemagick for Mac)
 - [ ] Stop using imagemagick to convert python's bitmaps for Haskell's use
 - [ ] Add paper on algorithm

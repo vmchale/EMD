@@ -39,3 +39,13 @@ To try your own, consider the following example:
 >>>haskemd(a1, a2)
 6.0
 ```
+
+##Ground distance
+In our case, the "ground distance" is the hamming distance. Moreover, the matrix for the metric is automatically generated. This means that an array like
+```
+np.array([0.25,0.5])
+```
+must have the correct values in the correct places. In fact, d\_ij is based on the indices. Here, d\_01 would mean the distance between the bin containing 0.25 and the bin containing 0.5
+
+##Hamming distance
+To get the hamming distance from a integer indices, say 3 and 7, we first convert to binary to get 011 and 111. Then we can compute the hamming distance to get 1 (in this case).
