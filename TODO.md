@@ -1,8 +1,8 @@
 - [x] Allow haskemd to take in arrays of floats
-- [ ] Fix python code so that converting to/from floats isn't so slow
+- [ ] Fix python code so that converting to/from floats isn't so slow - perhaps by taking in the multiplier as an argument, or inferring it from size
 - [ ] Allow custom functions in matrix generation (not just hammingDistance)
-- [ ] Document indices/auto-generated matrix relationship
-- [ ] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
+- [x] Document indices/auto-generated matrix relationship
+- [x] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
 - [ ] Test on Mac (and Windows, though less important)
 - [ ] Write documentation on windows setup (and imagemagick for Mac)
 - [ ] Stop using imagemagick to convert python's bitmaps for Haskell's use
