@@ -29,11 +29,15 @@ def emd(list1, list2):
     l2 = tobmp (list2, "list2")
     if not isfile(path+"data/matrix-"+(str(list1.size))):
         makemat(list1)
-    return haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size)))
+    output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size)))
+    output = str(output)
+    return float(''.join(filter(lambda x: x.isdigit(), output)))
 
 def haskemd(list1, list2, matrix):
-    subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "EMD-exe",str(list1),str(list2),matrix], cwd=path).wait()
+    p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "EMD-exe",str(list1),str(list2),matrix], cwd=path, stdout=subprocess.PIPE)##.wait()
+    out, trash = p.communicate()
     cleanup()
+    return out
 
 def makemat(l):
     dim = l.size
