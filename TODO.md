@@ -1,4 +1,5 @@
 - [x] Allow haskemd to take in arrays of floats
+- [ ] Fix python code so that converting to/from floats isn't so slow
 - [ ] Allow custom functions in matrix generation (not just hammingDistance)
 - [ ] Document indices/auto-generated matrix relationship
 - [ ] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter

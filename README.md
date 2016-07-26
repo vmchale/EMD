@@ -86,4 +86,4 @@ import Data.Array.Accelerate.Interpreter
 import System.Environment
 import System.IO.Unsafe (unsafePerformIO)
 ```
-Save the file and run `stack build` to build it. 
+Save the file and run `stack build` to build it. It will be reasonably fast for up to 1000 bins, and after that it will be noticeably slower than the GPU 
