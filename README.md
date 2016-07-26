@@ -49,3 +49,8 @@ must have the correct values in the correct places. In fact, d<sub>ij</sub> is b
 
 ##Hamming distance
 To get the hamming distance from a integer indices, say 3 and 7, we first convert to binary to get 011 and 111. Then we can compute the hamming distance to get 1 (in this case). Hence d<sub>37</sub>=1
+
+##Stored matrices
+After the matrix for a metric is computed, it is stored in the data/ directory. This means that if you compute an EMD between distributions with 8192 bins, every subsequent calculation between distributions with 8192 bins will be faster. As the number of bins gets larger, it becomes necessary to store these matrices in order to guarantee quick runtime. 
+
+However, this also means that the data/directory can get pretty large: up to 257M for 8192 bins, or 1.1G for 16384 bins. 
