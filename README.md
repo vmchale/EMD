@@ -17,11 +17,11 @@ sudo python3 setup.py install
 ```
 
 ##Python
-The provided python wrapper takes two numpy arrays and computes the EMD:
+The provided python wrapper takes two (one-dimensional) numpy arrays and computes the EMD:
 ```
 python3
 >>>import haskemd
->>>haskemd.emd(haskemd.sinksrand(), haskemd.sourcesrand())
+>>>haskemd.emd(haskemd.sinksrand(1024), haskemd.sourcesrand(1024))
 692959.0
 ```
-
+`sinksrand(1024)` and `sourcesrand(1024)` just generates test data with 

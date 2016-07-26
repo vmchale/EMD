@@ -9,11 +9,11 @@ from fractions import Fraction
 
 path = os.environ["HASKPATH"]
 
-def sinksrand():
-    return randint(0,1024,1024,np.uint32)
+def sinksrand(num):
+    return randint(0,num,num,np.uint32)
 
-def sourcesrand():
-    return randint(0,1024,1024,np.uint32)
+def sourcesrand(num):
+    return randint(0,num,num,np.uint32)
 
 def tobmp (lists, filename):
     arr = np.uint32(np.int32(lists))
