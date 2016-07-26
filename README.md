@@ -1,5 +1,5 @@
 #EMD
-Earth mover's distance on Nvidia GPUS
+Earth mover's distance on Nvidia GPUs
 
 ##CUDA
 CUDA and relevant NVIDIA drivers have to be installed from their site. This should be done first.
