@@ -13,7 +13,7 @@ Then type `stack setup` followed by `stack build` in the directory EMD/
 
 The script `start.sh` will create common points between python and haskell. If the script does not work on your platform, download imagemagick for your platform and create an environment variable `HASKPATH` with with the path to `EMD/` e.g. `HASKPATH=/home/username/EMD/`
 
-Once this is done `cd` into `haskellemd` and run
+Once this is done `cd` into `haskemd` and run
 ```
 sudo python3 setup.py install
 ```
