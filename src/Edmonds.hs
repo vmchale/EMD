@@ -7,6 +7,7 @@ module Edmonds
 import Data.Array.Accelerate as A
 import Data.Array.Accelerate.IO
 import Data.Array.Accelerate.CUDA
+--import Data.Array.Accelerate.Interpreter
 import System.Environment
 import System.IO.Unsafe (unsafePerformIO)
 import ReadDist
