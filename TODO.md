@@ -8,3 +8,7 @@
 - [ ] Stop using imagemagick to convert python's bitmaps for Haskell's use
 - [ ] Add paper on algorithm
 - [ ] Figure out difference between my computed value and theirs
+- [ ] Figure out uniformity requirements for a constant factor
+- [ ] Add documentation on calibration for other metrics. make a program
+- [ ] Make a table or something for factor w.r.t. variance and node number
+- [ ] Fix documentation so that sinks, sources are actually distributions
