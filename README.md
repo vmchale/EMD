@@ -27,7 +27,7 @@ python3
 >>>import haskemd
 >>>arrs = haskemd.equalize(haskemd.sinksrand(1024),haskemd.sourcesrand(1024))
 >>>haskemd.emd(a[0],a[1])
-47313.0
+232386.0
 ```
 `sinksrand(1024)` and `sourcesrand(1024)` just generates test data with 1024 bins, while the `equalize` function makes the distributions have equal mass each. 
 
