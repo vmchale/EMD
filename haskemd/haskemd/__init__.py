@@ -45,7 +45,7 @@ def emd(list1, list2):
     list1 = mult*list1
     list2 = mult*list2
     var = np.std(list1-list2)
-    nodes = np.log2(len(list1))
+    nodes = int(np.log2(len(list1)))
     logmean = np.log2((np.average(list1)+np.average(list2))/2)
     l1 = tobmp (list1, "list1")
     l2 = tobmp (list2, "list2")
