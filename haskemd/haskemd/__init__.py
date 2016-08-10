@@ -45,16 +45,19 @@ def emd(list1, list2):
     list1 = mult*list1
     list2 = mult*list2
     var = np.std(list1-list2)
-    nodes = round(np.log2(len(list1)))
+    nodes = np.log2(len(list1))
+    logmean = np.log2((np.average(list1)+np.average(list2))/2)
     l1 = tobmp (list1, "list1")
     l2 = tobmp (list2, "list2")
     if not isfile(path+"data/matrix-"+(str(list1.size))):
         makemat(list1)
     output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size)))
     output = str(output)
-    factor = np.float64((((2*np.sqrt(2))**int(9-nodes))*.000206201*var)+.253198)
+    factor = np.float64((((2*np.sqrt(2))**int(8-logmean))*.000206201*var)+.253198)
+##should factor be a function of U as well? or avg. val.?? cuz it kinda is :(
+#or ubar? i am not sure yet!
     back = float(''.join(filter(lambda x: x.isdigit(), output)))/float(mult)
-    return round(back*factor)
+    return round(float(factor)*back)
 
 def haskemd(list1, list2, matrix):
     p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "EMD-exe",str(list1),str(list2),matrix], cwd=path, stdout=subprocess.PIPE)##.wait()
