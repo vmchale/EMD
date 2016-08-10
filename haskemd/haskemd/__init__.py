@@ -53,7 +53,7 @@ def emd(list1, list2):
         makemat(list1)
     output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size)))
     output = str(output)
-    factor = np.float64((((2*np.sqrt(2))**int(8-logmean))*.000206201*var)+.253198)
+    factor = np.float64((((2*np.sqrt(2))**(8-logmean))*.000206201*var)+.253198)
 ##should factor be a function of U as well? or avg. val.?? cuz it kinda is :(
 #or ubar? i am not sure yet!
     back = float(''.join(filter(lambda x: x.isdigit(), output)))/float(mult)
