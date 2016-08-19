@@ -1,6 +1,9 @@
 - [x] Allow haskemd to take in arrays of floats
 - [ ] Fix python code so that converting to/from floats isn't so slow - perhaps by taking in the multiplier as an argument, or inferring it from size
 - [ ] Allow custom functions in matrix generation (not just hammingDistance)
+- [x] Run the metric computation in parallel using REPA
+- [x] Figure out whether fllvm is worth using/fixing
+- [ ] Fix haskemd so it reads the correct number of processors
 - [x] Document indices/auto-generated matrix relationship
 - [x] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
 - [ ] Test on Mac

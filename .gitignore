@@ -3,4 +3,5 @@ readouts
 *.ods
 compare.py
 test.py
+processors
 *.npy

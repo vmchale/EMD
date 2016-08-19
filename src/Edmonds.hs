@@ -11,6 +11,7 @@ import Data.Array.Accelerate.CUDA
 import System.Environment
 import System.IO.Unsafe (unsafePerformIO)
 import ReadDist
+import ReadPNG hiding (exec)
 import Codec.BMP
 import Control.Monad
 
@@ -20,7 +21,7 @@ type IndexList = Acc (Array DIM1 InIndex, Array DIM1 InIndex)
 type IndexWeightList = Acc (Array DIM1 ((InIndex, InIndex), InWeight))
 type InWeight = Int
 type InIndex = Int
-data Graph = Graph { distances :: Acc (Array DIM2 Word32)
+data Graph = Graph { distances :: Acc (Array DIM2 Word8)
                    , nodes :: Acc (Array DIM1 InWeight)
                    }
 
@@ -32,8 +33,8 @@ exec :: IO()
 exec = do
     (list1:list2:metricname:_) <- getArgs
     let reduced = (liftM2 (liftM2 red)) (readImageFromBMP list1) (readImageFromBMP list2)
-    let metric = readImageFromBMP metricname
-    (let tl = (liftM2 (liftM2 takeLists')) in tl reduced metric >>= (return . show)) >>= putStrLn
+    let metric = readImage' metricname
+    ((let tl = liftM2 (liftM2 takeLists') in tl reduced (liftM (return) metric)) >>= (return . show)) >>= putStrLn
 --    putStrLn "finished."
 
 -- | takes the first row of a two-dimensional matrix to a vector
@@ -45,7 +46,7 @@ red :: Array DIM2 Word32 -> Array DIM2 Word32 -> Array DIM1 Int
 red a b = run $ (A.zipWith (-) (A.map A.fromIntegral (thevect $ use a)) (A.map A.fromIntegral (thevect $ use b)))
 
 -- | Provides starting values for computation. Outputs a string with the value.
-takeLists' :: Array DIM1 Int -> Array DIM2 Word32 -> String
+takeLists' :: Array DIM1 Int -> Array DIM2 Word8 -> String
 takeLists' reduced metric = show $ head $ A.toList $ run $ calcEMD' graph x delta extra powers
     where x = empty
           extra = lift (e, e) :: IndexList

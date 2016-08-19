@@ -49,9 +49,9 @@ def emd(list1, list2):
     logmean = np.log2((np.average(list1)+np.average(list2))/2)
     l1 = tobmp (list1, "list1")
     l2 = tobmp (list2, "list2")
-    if not isfile(path+"data/matrix-"+(str(list1.size))):
+    if not isfile(path+"data/matrix-"+(str(list1.size))+".png"):
         makemat(list1)
-    output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size)))
+    output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size))+".png")
     output = str(output)
     factor = np.float64((((2*np.sqrt(2))**(8-logmean))*.000206201*var)+.253198)
 ##should factor be a function of U as well? or avg. val.?? cuz it kinda is :(
@@ -60,14 +60,14 @@ def emd(list1, list2):
     return round(float(factor)*back)
 
 def haskemd(list1, list2, matrix):
-    p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "EMD-exe",str(list1),str(list2),matrix], cwd=path, stdout=subprocess.PIPE)##.wait()
+    p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "--", "EMD-exe",str(list1),str(list2),matrix,"-N8"], cwd=path, stdout=subprocess.PIPE)##.wait()
     out, trash = p.communicate()
     cleanup()
     return out
 
 def makemat(l):
     dim = l.size
-    subprocess.Popen (["stack","exec","Mat-exe",str(dim),"data/matrix-"+str(dim)], cwd=path).wait()
+    subprocess.Popen (["stack","exec","--","Mat-exe",str(dim),"data/matrix-"+str(dim),"-N8"], cwd=path).wait()
 
 def cleanup():
     ##subprocess.call (["rm","matrix-*"])
