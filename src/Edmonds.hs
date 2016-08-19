@@ -27,7 +27,7 @@ data Graph = Graph { distances :: Acc (Array DIM2 Word32)
 type Pseudoflow = Acc (Array DIM2 InWeight)
 
 -- | Reads two distributions as lists of values and a metric as a matrix of values.
--- | Both inputs are 32-bit bitmaps
+-- | Disrtibutions are 32-bit bitmaps while matrix is 8-bit greyscale PNG
 exec :: IO()
 exec = do
     (list1:list2:metricname:_) <- getArgs
