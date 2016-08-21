@@ -1,13 +1,15 @@
 - [x] Allow haskemd to take in arrays of floats
-- [ ] Fix python code so that converting to/from floats isn't so slow - perhaps by taking in the multiplier as an argument, or inferring it from size
+- [ ] Fix python code so that converting to/from floats isnt so slow - perhaps by taking in the multiplier as an argument, or inferring it from size
 - [ ] Allow custom functions in matrix generation (not just hammingDistance)
+- [ ] do this by making it import from another library "function" or "distances"
+- [ ] use optparse-applicative to make better command line options for the haskell code (i.e. reading lists from command line, reading a function name/matrix file, etc.
 - [x] Run the metric computation in parallel using REPA
 - [x] Figure out whether fllvm is worth using/fixing
 - [ ] Fix haskemd so it reads the correct number of processors
 - [x] Document indices/auto-generated matrix relationship
 - [x] Add an option for compiling sequential code using Data.Array.Accelerate.Interpreter
 - [ ] Test on Mac
-- [ ] Stop using imagemagick to convert python's bitmaps for Haskell's use
+- [ ] Stop using imagemagick to convert pythons bitmaps for Haskells use
 - [ ] Add paper on algorithm
 - [x] Figure out difference between my computed value and theirs
 - [ ] Figure out uniformity requirements for a constant factor
@@ -15,4 +17,4 @@
 - [x] Make a table or something for factor w.r.t. variance and node number
 - [ ] make equalize method take right number
 - [x] Fix documentation so that sinks, sources are actually distributions
-- [ ] Use cpulimit for large matrices (16384) to allow background processing
+- [x] Use cpulimit for large matrices (16384) to allow background processing
