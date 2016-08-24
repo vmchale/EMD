@@ -35,7 +35,6 @@ exec = do
     let reduced = (liftM2 (liftM2 red)) (readImageFromBMP list1) (readImageFromBMP list2)
     let metric = readImage' metricname
     ((let tl = liftM2 (liftM2 takeLists') in tl reduced (liftM (return) metric)) >>= (return . show)) >>= putStrLn
---    putStrLn "finished."
 
 -- | takes the first row of a two-dimensional matrix to a vector
 thevect :: (Elt a) => Acc (Array DIM2 a) -> Acc (Array DIM1 a)

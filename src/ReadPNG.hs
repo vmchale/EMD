@@ -20,7 +20,6 @@ trim im = run $ A.slice (use im) (lift (A.Z A.:. A.All A.:. A.All A.:. (0::Int))
 
 readImage' :: FilePath -> IO (A.Array A.DIM2 Word8)
 readImage' = (liftM fromRepa) . (flip (>>=) copyP) . (liftM strip) . runIL . readImage
---basically since Image is an algebraic data type we need a function that goes down and operates on Images!
 
 strip :: Image -> (R.Array F R.DIM2 Word8)
 strip (Grey x) = x

@@ -1,6 +1,9 @@
+patterns
 data/matrix-*
+docs/*
 readouts
 *.ods
+*.xlsx
 compare.py
 test.py
 processors

@@ -10,7 +10,7 @@ import Data.Array.Repa.IO.DevIL
 import Data.Array.Repa.Repr.ForeignPtr (F)
 import Data.Array.Repa as R
 
--- | writes a metric to file as a 32-bit bitmap. Metric is hamming distance.
+-- | writes a metric to file as an 8-bit PNG. Metric is hamming distance.
 exec :: IO ()
 exec = do
     (dim:filename:_) <- getArgs

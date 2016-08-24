@@ -15,6 +15,7 @@ def sinksrand(num):
 def sourcesrand(num):
     return randint(0,num,num,np.uint32)
 
+## Makes sure that randomly generated sinks and sources both have the same sum
 def equalize(sinks, sources):
     if sum(sinks) > sum(sources):
         sources = np.append(sources, sum(sinks)-sum(sources))
@@ -24,6 +25,7 @@ def equalize(sinks, sources):
         sources = np.append(sources, 0)
     return (sinks, sources)
 
+## Writes a 1-dimensional array as a bitmap for use by Haskell Accelerate
 def tobmp (lists, filename):
     arr = np.uint32(np.int32(lists))
     arr = np.expand_dims(arr, axis=1)
@@ -33,6 +35,7 @@ def tobmp (lists, filename):
     img.save(path+filename+'.png')
     subprocess.Popen(["mogrify","-format","bmp",filename+'.png'], cwd=path).wait()
 
+## Converts an array of probabilites into an array of unsigned integers for efficient use by the GPU
 def multiplier (list1, list2):
     maximum = 1
     l = np.concatenate((list1, list2), axis=0)
@@ -57,6 +60,7 @@ def testemd(list1, list2):
     back = float(''.join(filter(lambda x: x.isdigit(), output)))/float(mult)
     return (round(float(factor)*back), logmean, var)
 
+##Computes the Earth Mover's distance between two distributions
 def emd(list1, list2):
     mult = multiplier(list1, list2)
     list1 = mult*list1
@@ -74,16 +78,18 @@ def emd(list1, list2):
     back = float(''.join(filter(lambda x: x.isdigit(), output)))/float(mult)
     return round(float(factor)*back)
 
+##Calls the Haskell program which actually does the computation
 def haskemd(list1, list2, matrix):
-    p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "--", "EMD-exe",str(list1),str(list2),matrix,"-N8"], cwd=path, stdout=subprocess.PIPE)##.wait()
+    p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "--", "EMD-exe",str(list1),str(list2),matrix,"-N8"], cwd=path, stdout=subprocess.PIPE)
     out, trash = p.communicate()
     cleanup()
     return out
 
+##Calls the Haskell program that generates matrices from the metric
 def makemat(l):
     dim = l.size
     subprocess.Popen (["stack","exec","--","Mat-exe",str(dim),"data/matrix-"+str(dim),"-N8"], cwd=path).wait()
 
+##Deletes bitmaps that were fed into the Haskell program
 def cleanup():
-    ##subprocess.call (["rm","matrix-*"])
     subprocess.Popen (["rm","list1.bmp","list2.bmp","list1.png","list2.png"], cwd=path).wait()
