@@ -11,8 +11,6 @@ exec = do
     writeImageToBMP (filename Prelude.++ "f") mat1
     writeImageToBMP (filename Prelude.++ "s") mat2
 
---can we even glue together arrays like we want?? idk but probably yeah, at least in python...
-
 generateMatrix1 :: Int -> Array DIM2 RGBA32
 generateMatrix1 a = A.fromList sh list :: Array DIM2 Word32
     where sh = (Z:.a:.1)
