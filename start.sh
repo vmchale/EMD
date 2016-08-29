@@ -8,6 +8,3 @@ sudo apt-get install -y imagemagick
 #brew install devil
 #brew install llvm
 #brew install imagemagick
-wget -qO- https://get.haskellstack.org/ | sh
-stack setup
-stack build
