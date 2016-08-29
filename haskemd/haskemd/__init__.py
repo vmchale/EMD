@@ -80,7 +80,8 @@ def emd(list1, list2):
 
 ##Calls the Haskell program which actually does the computation
 def haskemd(list1, list2, matrix):
-    p=subprocess.Popen(["sudo", "stack", "exec", "--allow-different-user", "--", "EMD-exe",str(list1),str(list2),matrix,"-N8"], cwd=path, stdout=subprocess.PIPE)
+    command = "sudo -E env \"PATH=$PATH\" EMD "+str(list1)+" "+str(list2)+" "+matrix+" -N8"
+    p=subprocess.Popen(command, shell=True, cwd=path, stdout=subprocess.PIPE)
     out, trash = p.communicate()
     cleanup()
     return out
@@ -88,7 +89,7 @@ def haskemd(list1, list2, matrix):
 ##Calls the Haskell program that generates matrices from the metric
 def makemat(l):
     dim = l.size
-    subprocess.Popen (["stack","exec","--","Mat-exe",str(dim),"data/matrix-"+str(dim),"-N8"], cwd=path).wait()
+    subprocess.Popen (["Mat",str(dim),"data/matrix-"+str(dim),"-N8"], cwd=path).wait()
 
 ##Deletes bitmaps that were fed into the Haskell program
 def cleanup():
