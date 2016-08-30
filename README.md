@@ -5,18 +5,11 @@ Earth mover's distance on Nvidia GPUs
 CUDA and relevant NVIDIA drivers have to be installed from their site. This should be done first.
 
 ##Building
-To build, you must install stack with
+To build, simply run
 ```
-wget -qO- https://get.haskellstack.org/ | sh
+build.sh
 ```
-Then type `stack setup` followed by `stack install` in the directory EMD/
-
-The script `start.sh` will create common points between python and haskell. If the script does not work on your platform, download imagemagick for your platform and create an environment variable `HASKPATH` with with the path to `EMD/` e.g. `HASKPATH=/home/username/EMD/`. 
-
-Once this is done `cd` into `haskemd` and run
-```
-sudo python3 setup.py install
-```
+in the directory `EMD/`. Note that the script *must* be run from this directory!
 
 After this, the haskemd module can be used from any directory.
 
@@ -25,9 +18,9 @@ The provided python wrapper takes two (one-dimensional) numpy arrays and compute
 ```
 python3
 >>>import haskemd
->>>arrs = haskemd.equalize(haskemd.sinksrand(1024),haskemd.sourcesrand(1024))
+>>>arrs = haskemd.equalize(haskemd.sinksrand(1023),haskemd.sourcesrand(1023))
 >>>haskemd.emd(a[0],a[1])
-232386.0
+232386
 ```
 `sinksrand(1024)` and `sourcesrand(1024)` just generates test data with 1024 bins, while the `equalize` function makes the distributions have equal mass each. 
 
@@ -38,9 +31,9 @@ To try your own, consider the following example:
 >>>a1 = np.array([1,2,3,4])
 >>>a2 = np.array([4,3,2,1])
 >>>haskemd(a1, a2)
-6.0
+6
 ```
-You might be prompted for the sudo password. This is because of a bug upstream in the code for Haskell Accelerate. 
+You might be prompted for the sudo password while computing the EMD. This is because of a bug upstream in the code for Haskell Accelerate. 
 
 ##Ground distance
 In our case, the "ground distance" is the hamming distance. Moreover, the matrix for the metric is automatically generated. This means that an array like
@@ -88,4 +81,4 @@ import Data.Array.Accelerate.Interpreter
 import System.Environment
 import System.IO.Unsafe (unsafePerformIO)
 ```
-Save the file and run `stack build` to build it. It will be reasonably fast for up to 1000 bins, and after that it will be noticeably slower than the GPU 
+Save the file and run `stack install` to build and install it. It will be reasonably fast for up to 1000 bins, and after that it will be noticeably slower than the GPU 
