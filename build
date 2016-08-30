@@ -4,7 +4,8 @@ export HASKPATH=$(pwd)/
 #(nproc --all) > haskemd/haskemd/processors
 PATH=$PATH:~/.local/bin
 (echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
-if [[ "$OSTYPE" == "darwin"* ]]; then
+BREW_CHECK=$(type brew > /dev/null)
+if [ ! $BREW_CHECK ] && [ "$OSTYPE" == "darwin"* ] ; then
     echo 'downloading brew for Mac to install required packages...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
@@ -23,8 +24,9 @@ elif [[ ! -z $PACMAN_CMD ]]; then
 else
     echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick."
 fi
-if ! type "EMD" > /dev/null; then
-    if ! type "stack" > /dev/null; then
+EMD_CMD=$(type EMD > /dev/null)
+if ! $EMD_CMD ; then
+    if ! type "stack" > /dev/null ; then
         wget -qO- https://get.haskellstack.org/ | sh
     fi
     stack setup && stack build && stack install
