@@ -13,6 +13,11 @@ in the directory `EMD/`. Note that the script *must* be run from this directory!
 
 After this, the haskemd module can be used from any directory.
 
+In fact, you might want to test that all is well with
+```
+python3 test.py
+```
+
 ##Python
 The provided python wrapper takes two (one-dimensional) numpy arrays and computes the EMD:
 ```
