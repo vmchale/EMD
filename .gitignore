@@ -5,6 +5,5 @@ readouts
 *.ods
 *.xlsx
 compare.py
-test.py
 processors
 *.npy
