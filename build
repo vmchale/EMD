@@ -21,11 +21,15 @@ elif [[ ! -z $YUM_CMD ]]; then
 elif [[ ! -z $PACMAN_CMD ]]; then 
     pacman -S imagemagick devil llvm
 else
-    echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick"
+    echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick."
 fi
-wget -qO- https://get.haskellstack.org/ | sh
-stack setup && stack build && stack install
-sudo python3 haskemd/setup.py install
+if ! type "EMD" > /dev/null; then
+    if ! type "stack" > /dev/null; then
+        wget -qO- https://get.haskellstack.org/ | sh
+    fi
+    stack setup && stack build && stack install
+fi
+cd haskemd/ && sudo python3 setup.py install && cd ../
 mkdir data/
 #echo 'binaries built, remove libraries? (y/n) (1.8G)'
 #sudo rm -r ~/.stack/
