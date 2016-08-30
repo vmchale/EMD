@@ -7,9 +7,11 @@ CUDA and relevant NVIDIA drivers have to be installed from their site. This shou
 ##Building
 To build, simply run
 ```
-build.sh
+./build
 ```
 in the directory `EMD/`. Note that the script *must* be run from this directory!
+
+If you are on a unix system, the only thing that will vary by platform will be how to install the packages `devIL`, `imagemagick`, and `llvm` If you are using a package manager that is NOT yum, apt-get, pacman, or brew then you will have to install these manually before running `./build`
 
 After this, the haskemd module can be used from any directory.
 
