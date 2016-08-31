@@ -13,11 +13,11 @@ if [[ ! "$PATH" == *":~/.local/bin"* ]] ; then
 fi
 BREW_CHECK=$(type brew)
 PORTS_CHECK=$(type ports)
-#if [ "$OSTYPE" = "linux-gnu" ] ; then
-#    mkdir ~/.local/ &> /dev/null
-#    mkdir ~/.local/bin/ &> /dev/null
-#    cp bin/x86_64-linux/* ~/.local/bin/
-#fi
+if [ "$OSTYPE" = "linux-gnu" ] ; then
+    mkdir ~/.local/ &> /dev/null
+    mkdir ~/.local/bin/ &> /dev/null
+    cp bin/x86_64-linux/* ~/.local/bin/
+fi
 if [ ! $BREW_CHECK > /dev/null ] && [ ! $PORTS_CHECK > /dev/null ] && [ "$OSTYPE" == "darwin"* ] ; then
     echo "Neither brew nor ports detected..."
     echo "Install brew (to automatically install dependencies)?"
