@@ -13,7 +13,7 @@ import Data.Array.Repa as R
 exec :: IO ()
 exec = do
     (dim:filename:_) <- getArgs
-    mat' <- generateMatrix' (read dim)
+    mat' <- generateMatrix'' (read dim)
     runIL $ writeImage (filename Prelude.++".png") mat'
 
 -- | generates a matrix such that a_ij = (hammingDistance i j)

@@ -1,12 +1,18 @@
 #!/bin/bash
-export HASKPATH=$(pwd)/
-(echo 'export HASKPATH='$(pwd)/) >> ~/.bashrc
+if [[ ! "$HASKPATh" == $(pwd) ]] ; then
+    export HASKPATH=$(pwd)/
+    (echo 'export HASKPATH='$(pwd)/) >> ~/.bashrc
+fi
 #(nproc --all) > haskemd/haskemd/processors
-PATH=$PATH:~/.local/bin
-(echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
+if [[ ! "PATH"=*":~/.local/bin"* ]] ; then
+    echo 'adding ~/.local/bin to PATH'
+    PATH=$PATH:~/.local/bin
+    (echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
+fi
 BREW_CHECK=$(type brew)
 PORTS_CHECK=$(type ports)
 if [ ! $BREW_CHECK > /dev/null ] && [ ! $PORTS_CHECK > /dev/null ] && [ "$OSTYPE" == "darwin"* ] ; then
+    echo "Neither brew nor ports detected..."
     echo "Install brew (to automatically install dependencies)?"
     select yn in "Yes" "No"; do
         case $yn in
@@ -19,12 +25,16 @@ APT_GET_CMD=$(which apt-get)
 YUM_CMD=$(which yum)
 PACMAN_CMD=$(which pacman)
 BREW_CMD=$(which brew)
+PORTS_CMD=$(which port)
 if [[ ! -z $APT_GET_CMD ]]; then
-    sudo apt-get install -y libdevil-dev llvm imagemagick nvidia-cuda-dev
+    echo "installing dependencies with apt-get...."
+    (sudo apt-get install -y libdevil-dev llvm-3.8 imagemagick nvidia-cuda-dev) &> build.log
 elif [[ ! -z $BREW_CMD ]]; then
     brew install devil llvm imagemagick
 elif [[ ! -z $YUM_CMD ]]; then
     yum install -y DevIL-devel imagemagick llvm
+elif [[ ! -z $PORTS_CMD ]]; then
+    sudo port install ImageMagick libdevil llvm-3.8.1
 elif [[ ! -z $PACMAN_CMD ]]; then 
     pacman -S imagemagick devil llvm cuda
     export PATH=$PATH:/opt/cuda/bin
@@ -43,14 +53,15 @@ if ! type "EMD" > /dev/null ; then
             esac
         done
     fi
-    stack setup && stack build && stack install >> build.log
+    (stack setup &>> build.log && stack build && stack install)
 fi
-cd haskemd/ && sudo python3 setup.py install && cd ../
-mkdir data/
+cd haskemd/ && echo "Installing python package..." ; (sudo python3 setup.py install) >> ../build.log && cd ../
+mkdir data/ &> /dev/null
 if ! type "nvcc" > /dev/null ; then
     echo "" ; echo "Note that CUDA has not been installed! You will have to install it now"
-    echo "Note that CUDA has not been installed! You will have to install it now" >> builderrors.log
+    echo "Note that CUDA has not been installed! You will have to install it now" &>> build.log
 fi
+echo "Python built sucessfully."
 #echo 'binaries built, remove libraries? (y/n) (1.8G)'
 #sudo rm -r ~/.stack/
 #sudo rm -r .stack-work/
