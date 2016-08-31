@@ -53,6 +53,7 @@ if ! type "EMD" > /dev/null ; then
             esac
         done
     fi
+    echo "setting up stack..."
     (stack setup &>> build.log && stack build && stack install)
 fi
 cd haskemd/ && echo "Installing python package..." ; (sudo python3 setup.py install) >> ../build.log && cd ../

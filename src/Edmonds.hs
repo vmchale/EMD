@@ -46,8 +46,9 @@ red a b = run $ (A.zipWith (-) (A.map A.fromIntegral (thevect $ use a)) (A.map A
 
 -- | Provides starting values for computation. Outputs a string with the value.
 takeLists' :: Array DIM1 Int -> Array DIM2 Word8 -> String
-takeLists' reduced metric = show $ head $ A.toList $ run $ calcEMD' graph x delta extra powers
-    where x = empty
+takeLists' reduced metric = show answer -- $ (Prelude.fromIntegral answer)*(factor (variance (use reduced)) 9.013)
+    where answer = head $ A.toList $ run $ calcEMD' graph x delta extra powers
+          x = empty
           extra = lift (e, e) :: IndexList
           e = toVect []
           delta = unit $ constant $ 2^(Prelude.ceiling (logBase 2 (u)) :: Int)

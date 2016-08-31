@@ -57,7 +57,7 @@ def testemd(list1, list2):
     output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size))+".png")
     output = str(output)
     factor = 1
-    back = float(''.join(filter(lambda x: x.isdigit(), output)))/float(mult)
+    back = float(''.join(filter(lambda x: x.isdigit() or x=='.', output)))/float(mult)
     return (round(float(factor)*back), logmean, var)
 
 ##Computes the Earth Mover's distance between two distributions
