@@ -79,11 +79,6 @@ copyMatrix file = A.fromList sh list :: Array DIM2 Word32 --Int
           list = read $ (lines file) Prelude.!! 1
           dim = read $ (lines file) Prelude.!! 0 
 
-generateMatrix :: Int -> Array DIM2 Int
-generateMatrix a = A.fromList sh list :: Array DIM2 Int
-    where sh = (Z:.a:.a) 
-          list = [ hammingDistance n m | n <- [0..(a-1)], m <- [0..(a-1)]]
-
 -- | takes a list to an accelerate array
 toVect :: (Elt a) => [a] -> Acc (Array DIM1 a)
 toVect list = use (A.fromList sh list)

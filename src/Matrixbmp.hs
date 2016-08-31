@@ -13,8 +13,8 @@ import Data.Array.Repa as R
 exec :: IO ()
 exec = do
     (dim:filename:_) <- getArgs
-    mat' <- generateMatrix'' (read dim)
-    runIL $ writeImage (filename Prelude.++".png") mat'
+    mat <- generateMatrix'' (read dim)
+    runIL $ writeImage (filename Prelude.++".png") mat
 --write haskell code to calibrate?? or maybe realistically it's better in python
 
 -- | generates a matrix such that a_ij = (hammingDistance i j)
