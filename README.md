@@ -13,13 +13,14 @@ To build, simply run
 ```
 in the directory `EMD/`.
 
-If you are on a unix system, the only thing that will vary by platform will be how to install the packages `devIL` (an image library), `imagemagick`, and `llvm` If `./build` fails to install these for you, you will have to install them manually.
+If you are on a linux machine, this will simply copy some binaries instead of building from source (which takes quite some time due to dependencies)
 
-To see more details about the './build', jump to the Manual Build section.
+EMD require `devIL` (an image library) and `imagemagick` to run. If `./build` fails to install these for you, you will have to install them manually.
 
-After this, the haskemd module can be used from any directory.
+If './build' fails completely, jump to the Manual Build section.
 
-You might want to test that all is well with
+After this, the haskemd module can be used from any directory. Test it with:
+
 ```
 python3 test.py
 ```
@@ -41,7 +42,7 @@ To try your own, consider the following example:
 >>>import numpy as np
 >>>a1 = np.array([1,2,3,4])
 >>>a2 = np.array([4,3,2,1])
->>>haskemd(a1, a2)
+>>>haskemd.emd(a1, a2)
 6
 ```
 You might be prompted for the sudo password while computing the EMD. This is because of a bug upstream in the code for Haskell Accelerate. 
@@ -93,10 +94,13 @@ import System.IO.Unsafe (unsafePerformIO)
 Save the file and run `stack install` to build and install it. It will be reasonably fast for up to 1000 bins, and after that it will be noticeably slower than the GPU 
 
 ##Manual Build
-There are three parts to building manually: downloading stack (a build tool for haskell), building the Haskell code, and installing the python module.
+There are three parts to building manually: downloading dependencies, building the Haskell code, and installing the python module. 
+
+###Dependencies
+The only outside dependencies are: devIL (an image processing library) and imagemagick. The website for devIL is http://openil.sourceforge.net/ and the website for imagemagick is http://www.imagemagick.org/script/binary-releases.php
 
 ###Get Stack
-To install `stack` simply type
+Stack is the tool that buils haskell. To install `stack` simply type
 ```
 wget -qO- https://get.haskellstack.org/ | sh
 ```

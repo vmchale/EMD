@@ -36,20 +36,20 @@ BREW_CMD=$(which brew)
 PORTS_CMD=$(which port)
 if [[ ! -z $APT_GET_CMD ]]; then
     echo "installing dependencies with apt-get...."
-    (sudo apt-get install -y libdevil-dev llvm-3.8 imagemagick nvidia-cuda-dev) &> build.log
+    (sudo apt-get install -y libdevil-dev imagemagick nvidia-cuda-dev) &> build.log
 elif [[ ! -z $BREW_CMD ]]; then
-    brew install devil llvm imagemagick
+    brew install devil imagemagick
 elif [[ ! -z $YUM_CMD ]]; then
-    yum install -y DevIL-devel imagemagick llvm
+    yum install -y DevIL-devel imagemagick
 elif [[ ! -z $PORTS_CMD ]]; then
-    sudo port install ImageMagick libdevil llvm-3.8.1
+    sudo port install ImageMagick libdevil
 elif [[ ! -z $PACMAN_CMD ]]; then 
-    pacman -S imagemagick devil llvm cuda
+    pacman -S imagemagick devil cuda
     export PATH=$PATH:/opt/cuda/bin
     echo 'export PATH=$PATH:/opt/cuda/bin' >> ~/.bashrc
 else
-    echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick."
-    echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick." >> builderrors.log
+    echo "Your package manager is not supported. Please install the DevIL image libray and imagemagick."
+    echo "Your package manager is not supported. Please install the DevIL image libray  and imagemagick." >> builderrors.log
 fi
 if ! type "EMD" > /dev/null ; then
     if ! type "stack" > /dev/null ; then
