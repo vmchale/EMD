@@ -9,13 +9,15 @@ To build, simply run
 ```
 ./build
 ```
-in the directory `EMD/`. Note that the script *must* be run from this directory!
+in the directory `EMD/`.
 
-If you are on a unix system, the only thing that will vary by platform will be how to install the packages `devIL`, `imagemagick`, and `llvm` If you are using a package manager that is NOT yum, apt-get, pacman, or brew then you will have to install these manually before running `./build`
+If you are on a unix system, the only thing that will vary by platform will be how to install the packages `devIL` (an image library), `imagemagick`, and `llvm` If `./build` fails to install these for you, you will have to install them manually.
+
+To see more details about the './build', jump to the Manual Build section.
 
 After this, the haskemd module can be used from any directory.
 
-In fact, you might want to test that all is well with
+You might want to test that all is well with
 ```
 python3 test.py
 ```
@@ -55,8 +57,6 @@ To get the hamming distance from a integer indices, say 3 and 7, we first conver
 ##Stored matrices
 After the matrix for a metric is computed, it is stored in the `data/` directory. This means that if you compute an EMD between distributions with 8192 bins, every subsequent calculation between distributions with 8192 bins will be faster. As the number of bins gets larger, it becomes necessary to store these matrices in order to guarantee quick runtime. 
 
-However, this also means that the data/directory can get pretty large: up to 257M for 8192 bins, or 1.1G for 16384 bins. 
-
 ##Computers without an NVIDIA GPU
 If you want to run the code on your CPU, you can can edit the code in `src/Edmonds.hs` Open it up and the first lines should look like this:
 ```
@@ -89,3 +89,17 @@ import System.Environment
 import System.IO.Unsafe (unsafePerformIO)
 ```
 Save the file and run `stack install` to build and install it. It will be reasonably fast for up to 1000 bins, and after that it will be noticeably slower than the GPU 
+
+##Manual Build
+There are three parts to building manually: downloading stack (a build tool for haskell), building the Haskell code, and installing the python module.
+
+###Get Stack
+To install `stack` simply type
+```
+wget -qO- https://get.haskellstack.org/ | sh
+```
+or go to haskellstack.org for help if that fails.
+
+###Building the Haskell
+To build the Haskell code, type
+

@@ -1,16 +1,23 @@
 #!/bin/bash
-if [[ ! "$HASKPATh" == $(pwd) ]] ; then
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )/
+cd $SCRIPTPATH
+if [[ ! "$HASKPATH" == $SCRIPTPATH ]] ; then
     export HASKPATH=$(pwd)/
     (echo 'export HASKPATH='$(pwd)/) >> ~/.bashrc
 fi
 #(nproc --all) > haskemd/haskemd/processors
 if [[ ! "PATH"=*":~/.local/bin"* ]] ; then
     echo 'adding ~/.local/bin to PATH'
-    PATH=$PATH:~/.local/bin
+    export PATH=$PATH:~/.local/bin
     (echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
 fi
 BREW_CHECK=$(type brew)
 PORTS_CHECK=$(type ports)
+#if [ "$OSTYPE" = "linux-gnu" ] ; then
+#    mkdir ~/.local/ &> /dev/null
+#    mkdir ~/.local/bin/ &> /dev/null
+#    cp bin/x86_64-linux/* ~/.local/bin/
+#fi
 if [ ! $BREW_CHECK > /dev/null ] && [ ! $PORTS_CHECK > /dev/null ] && [ "$OSTYPE" == "darwin"* ] ; then
     echo "Neither brew nor ports detected..."
     echo "Install brew (to automatically install dependencies)?"
@@ -53,10 +60,10 @@ if ! type "EMD" > /dev/null ; then
             esac
         done
     fi
-    echo "setting up stack..."
-    (stack setup &>> build.log && stack build && stack install)
+    echo "setting up stack... this may take some time."
+    (stack setup &>> build.log ; echo 'stack set up successfully' && stack build && stack install)
 fi
-cd haskemd/ && echo "Installing python package..." ; (sudo python3 setup.py install) >> ../build.log && cd ../
+cd $SCRIPTPATH/haskemd/ && echo "Installing python package..." ; (sudo python3 setup.py install) >> ../build.log && cd ../
 mkdir data/ &> /dev/null
 if ! type "nvcc" > /dev/null ; then
     echo "" ; echo "Note that CUDA has not been installed! You will have to install it now"
