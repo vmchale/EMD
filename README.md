@@ -4,6 +4,8 @@ Earth mover's distance on Nvidia GPUs
 ##CUDA
 CUDA and relevant NVIDIA drivers have to be installed from their site. This should be done first.
 
+The NVIDIA website https://developer.nvidia.com/cuda-downloads has everything you need.
+
 ##Building
 To build, simply run
 ```
