@@ -5,33 +5,52 @@ export HASKPATH=$(pwd)/
 PATH=$PATH:~/.local/bin
 (echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
 BREW_CHECK=$(type brew)
-if [ ! $BREW_CHECK > /dev/null ] && [ "$OSTYPE" == "darwin"* ] ; then
-    echo 'downloading brew for Mac to install required packages...'
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+PORTS_CHECK=$(type ports)
+if [ ! $BREW_CHECK > /dev/null ] && [ ! $PORTS_CHECK > /dev/null ] && [ "$OSTYPE" == "darwin"* ] ; then
+    echo "Install brew (to automatically install dependencies)?"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes )     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ; break;;
+            No ) exit;;
+        esac
+    done
 fi
 APT_GET_CMD=$(which apt-get)
 YUM_CMD=$(which yum)
 PACMAN_CMD=$(which pacman)
 BREW_CMD=$(which brew)
 if [[ ! -z $APT_GET_CMD ]]; then
-    sudo apt-get install -y libdevil-dev llvm imagemagick
+    sudo apt-get install -y libdevil-dev llvm imagemagick nvidia-cuda-dev
 elif [[ ! -z $BREW_CMD ]]; then
     brew install devil llvm imagemagick
 elif [[ ! -z $YUM_CMD ]]; then
     yum install -y DevIL-devel imagemagick llvm
 elif [[ ! -z $PACMAN_CMD ]]; then 
-    pacman -S imagemagick devil llvm
+    pacman -S imagemagick devil llvm cuda
+    export PATH=$PATH:/opt/cuda/bin
+    echo 'export PATH=$PATH:/opt/cuda/bin' >> ~/.bashrc
 else
     echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick."
+    echo "Your package manager is not supported. Please install the DevIL image libray, llvm, and imagemagick." >> builderrors.log
 fi
 if ! type "EMD" > /dev/null ; then
     if ! type "stack" > /dev/null ; then
-        wget -qO- https://get.haskellstack.org/ | sh
+        echo "Install stack (necessary to build)?"
+        select yn in "Yes" "No"; do
+            case $yn in
+                Yes ) wget -qO- https://get.haskellstack.org/ | sh ; break;;
+                No ) exit;;
+            esac
+        done
     fi
-    stack setup && stack build && stack install
+    stack setup && stack build && stack install >> build.log
 fi
 cd haskemd/ && sudo python3 setup.py install && cd ../
 mkdir data/
+if ! type "nvcc" > /dev/null ; then
+    echo "" ; echo "Note that CUDA has not been installed! You will have to install it now"
+    echo "Note that CUDA has not been installed! You will have to install it now" >> builderrors.log
+fi
 #echo 'binaries built, remove libraries? (y/n) (1.8G)'
 #sudo rm -r ~/.stack/
 #sudo rm -r .stack-work/

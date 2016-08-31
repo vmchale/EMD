@@ -23,3 +23,4 @@ readImage' = (liftM fromRepa) . (flip (>>=) copyP) . (liftM strip) . runIL . rea
 
 strip :: Image -> (R.Array F R.DIM2 Word8)
 strip (Grey x) = x
+strip _ = error "Image corrupted. Did you use Matrixbmp to generate it?"

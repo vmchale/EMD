@@ -92,7 +92,7 @@ getBool b = (toList $ run $ unit $ b) == [True]
 augmentTotal :: Graph -> Pseudoflow -> Weight -> IndexList -> Acc (Vector Int) -> Weight
 augmentTotal graph x delta extra powers = A.zipWith (*) delta (A.sum totalDist)
     where totalDist = A.map (\a -> let (k,v) = unlift a in A.fromIntegral $ (distances graph) A.! (index2 k v)) imbalanced
---    where totalDist = A.map (\a -> let (k,v) = unlift a in (the $ hammingDistance' (unit k) (unit v) powers)) imbalanced
+--    where totalDist = A.map (\a -> let (k,v) = unlift a in (the $ distance' (unit k) (unit v) powers)) imbalanced
           imbalanced = (nodesToFix graph x delta extra)
 
 -- | at the end of the delta-augmentation phase, nodes in either S(delta) or T(delta which had no partner
