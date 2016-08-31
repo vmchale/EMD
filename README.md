@@ -102,4 +102,14 @@ or go to haskellstack.org for help if that fails.
 
 ###Building the Haskell
 To build the Haskell code, type
+```
+stack setup && stack install
+```
+in the directory `EMD/`. This may take a long time.
 
+###Installing the python module
+To install the python module, simply `cd` into `haskemd/` and then type
+```
+sudo python3 setup.py install
+```
+At this point, everything should be working, so run `python3 test.py` to make sure this is the case.
