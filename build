@@ -6,7 +6,7 @@ if [[ ! "$HASKPATH" == $SCRIPTPATH ]] ; then
     (echo 'export HASKPATH='$(pwd)/) >> ~/.bashrc
 fi
 #(nproc --all) > haskemd/haskemd/processors
-if [[ ! "$PATH" == *":~/.local/bin"* ]] ; then
+if [[ ! "$PATH" == *":$HOME/.local/bin"* ]] ; then
     echo 'adding ~/.local/bin to PATH'
     export PATH=$PATH:~/.local/bin
     (echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
@@ -14,6 +14,7 @@ fi
 BREW_CHECK=$(type brew)
 PORTS_CHECK=$(type ports)
 if [ "$OSTYPE" = "linux-gnu" ] ; then
+    echo "copying linux binaries directly..."
     mkdir ~/.local/ &> /dev/null
     mkdir ~/.local/bin/ &> /dev/null
     cp bin/x86_64-linux/* ~/.local/bin/
