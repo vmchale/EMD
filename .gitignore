@@ -5,8 +5,9 @@ readouts
 *.ods
 *.xlsx
 compare.py
-haskemd/haskemd.egg-info
-haskemd/build
-haskemd/dist
+haskemd/haskemd.egg-info/
+haskemd/build/
+haskemd/dist/
+haskemd/__pychache/
 processors
 *.npy
