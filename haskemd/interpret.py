@@ -11,7 +11,7 @@ table = (np.concatenate(arr, axis=1))
 
 filt=float(sys.argv[1])
 a = np.transpose(table)
-f = (a[ (2>a[:,1]) ])
+f = (a[ (2>a[:,1]) & (.9<a[:,1]) ])
 filtered = (f[ (filt==f[:,4]) ])
 table = np.transpose(filtered)
 

@@ -16,12 +16,6 @@ def ham_dist(x, y):
         total=total+abs(int(a1[i])-int(a2[i]))
     return float(total)
 
-def markov(num):
-    return abs(np.cumsum(randint(-(num/8),(num/8),num))).astype(np.uint32)
-
-def rand(num):
-    return haskemd.sinksrand(num)
-
 def bettermarkov(num):
     return abs(np.cumsum(numpy.random.binomial(2,(1/num),num))).astype(np.uint32)
 
@@ -30,6 +24,9 @@ def bernoulli(num):
 
 def better(num):
     return numpy.random.binomial(num,(1/num),num)
+
+def skewed(num):
+    return numpy.random.binomial(4*num,(1/(num*4)),num)
 
 def equalize(sinks, sources):
     if sum(sinks) > sum(sources):
