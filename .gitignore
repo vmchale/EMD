@@ -4,6 +4,8 @@ docs/*
 readouts
 *.ods
 *.xlsx
+interpret.py
+calibrate.py
 compare.py
 haskemd/haskemd.egg-info/
 haskemd/build/
