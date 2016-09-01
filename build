@@ -11,14 +11,15 @@ if [[ ! "$PATH" == *":$HOME/.local/bin"* ]] ; then
     export PATH=$PATH:~/.local/bin
     (echo 'PATH=$PATH:~/.local/bin') >> ~/.bashrc
 fi
-BREW_CHECK=$(type brew)
-PORTS_CHECK=$(type ports)
-if [ "$OSTYPE" = "linux-gnu" ] ; then
+EMD_CHECK=$(which EMD)
+if [ -z $EMD_CHECK ] && [ "$OSTYPE" == "linux-gnu" ] ; then
     echo "copying linux binaries directly..."
     mkdir ~/.local/ &> /dev/null
     mkdir ~/.local/bin/ &> /dev/null
     cp bin/x86_64-linux/* ~/.local/bin/
 fi
+BREW_CHECK=$(type brew)
+PORTS_CHECK=$(type ports)
 if [ ! $BREW_CHECK > /dev/null ] && [ ! $PORTS_CHECK > /dev/null ] && [ "$OSTYPE" == "darwin"* ] ; then
     echo "Neither brew nor ports detected..."
     echo "Install brew (to automatically install dependencies)?"
