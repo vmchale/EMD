@@ -48,8 +48,9 @@ def testemd(list1, list2):
     list1 = mult*list1
     list2 = mult*list2
     var = np.std(list1-list2)
-    nodes = int(np.log2(len(list1)))
-    logmean = np.log2((np.average(list1)+np.average(list2))/2)
+    #nodes = int(np.log2(len(list1)))
+    #logmean = np.log2((np.average(list1)+np.average(list2))/2)
+    mean = (np.average(list1)+np.average(list2))/2
     l1 = tobmp (list1, "list1")
     l2 = tobmp (list2, "list2")
     if not isfile(path+"data/matrix-"+(str(list1.size))+".png"):
@@ -58,7 +59,7 @@ def testemd(list1, list2):
     output = str(output)
     factor = 1
     back = float(''.join(filter(lambda x: x.isdigit() or x=='.', output)))/float(mult)
-    return (round(float(factor)*back), logmean, var)
+    return (round(float(factor)*back), mean, var)
 
 ##Computes the Earth Mover's distance between two distributions
 def emd(list1, list2):
