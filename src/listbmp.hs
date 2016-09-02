@@ -3,8 +3,8 @@ import System.Environment
 import Data.Array.Accelerate.IO
 import Data.Array.Accelerate as A
 
-exec :: IO ()
-exec = do
+main :: IO ()
+main = do
     (dim:filename:_) <- getArgs
     let mat1 = Main.generateMatrix1 (read dim)
     let mat2 = Main.generateMatrix2 (read dim)

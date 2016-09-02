@@ -41,8 +41,7 @@ intToBinary :: Int -> [Int]
 intToBinary = Prelude.reverse . revIntToBinary
 
 powers :: Int -> [Int]
-powers nodes = Prelude.map (2^) $ takeWhile (<=nodes) [1..]
---replace 15 with nodes in the future tbh
+powers nodes = Prelude.map (2^) $ takeWhile (<=nodes) [0..]
 
 hammingDistance' :: Int -> Int -> [Int] -> Int
 hammingDistance' k v p = Prelude.sum $ Prelude.zipWith (\ x y -> if (x==y) then 0 else 1) ks vs

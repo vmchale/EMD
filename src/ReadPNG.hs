@@ -9,11 +9,14 @@ import Data.Array.Accelerate.Interpreter
 import Control.Monad
 import ReadDist
 import Codec.BMP
+import System.Environment
 
-exec = testRead >>= putStrLn
+exec = do
+    (filename:_) <- getArgs
+    (testRead filename) >>= putStrLn
 
-testRead :: IO String
-testRead = (liftM show) $ readImage' "matrix-1024.png"
+testRead :: String -> IO String
+testRead filename = (liftM show) $ readImage' filename
 
 trim :: A.Array A.DIM3 Word8 -> A.Array A.DIM2 Word8
 trim im = run $ A.slice (use im) (lift (A.Z A.:. A.All A.:. A.All A.:. (0::Int)))
