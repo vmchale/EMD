@@ -23,12 +23,15 @@ nodes=table[4]
 
 factor = pyemd/haskemd
 
-#slope should be halved each time we double the bins/add a node
-fit=np.polyfit(var, factor, 1)
-predict = (var)*fit[0]+fit[1]
-print(predict/factor)
-#basically we're having a problem with low variance
-#so we need to screw with the variance if we can; ideally without messing with the mean
+fit=np.polyfit(var/np.sqrt(plus), factor, 1)
+r=str(np.corrcoef(var/np.sqrt(plus), factor)[(1,0)])
+with open("regression.dat",'a') as output:
+    output.write(str(filt)+" "+str(fit)+" "+r+"\n")
+predict = (var/np.sqrt(plus))*fit[0]+fit[1]
+x = np.linspace(min(var/plus), max(var/plus))
+line = plt.plot(x, x*fit[0]+fit[1], c='red')
 
 plt.scatter(var/plus, factor)
-plt.show()
+plt.xlabel('Variance')
+plt.ylabel('Factor')
+plt.savefig('data'+str(int(filt))+'.png')

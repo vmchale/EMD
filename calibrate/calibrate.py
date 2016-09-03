@@ -1,6 +1,7 @@
 import haskemd
 import pyemd
 import numpy as np
+from os.path import isfile
 from numpy.random import randint
 import numpy.random
 
@@ -19,38 +20,21 @@ def ham_dist(x, y):
 def bettermarkov(num):
     return abs(np.cumsum(numpy.random.binomial(2,(1/num),num))).astype(np.uint32)
 
-def bernoulli(num):
-    return numpy.random.binomial(2,(1/2),num)
-
 def better(num):
     return numpy.random.binomial(num,(1/num),num)
 
-def skewed(num):
-    return numpy.random.binomial(4*num,(1/(num*4)),num)
-
-def equalize(sinks, sources):
-    if sum(sinks) > sum(sources):
-        sources = np.append(sources, sum(sinks)-sum(sources))
-        sinks = np.append(sinks, 0)
-    else:
-        sinks = np.append(sinks, sum(sources)-sum(sinks))
-        sources = np.append(sources, 0)
-    return (sinks, sources)
-
-#for x in [256,512,1024,2048,4096,8192]:
-#    distance_metric = np.fromfunction(np.vectorize(ham_dist), (x,x), dtype=int)
-#    np.save("numpy/mat"+str(x)+".npy",distance_metric)
+for x in [256,512,1024,2048,4096]:
+    if not isfile("numpy/mat"+str(x)+".npy"):
+        print("generating matrix...")
+        distance_metric = np.fromfunction(np.vectorize(ham_dist), (x,x), dtype=int)
+        np.save("numpy/mat"+str(x)+".npy",distance_metric)
 
 sizes = [256,256,256,256,256,256,256,256,256,256,512,512,512,512,512,512,512,512,512,512,1024,1024,1024,1024,1024,1024,1024,1024,1024,1024,2048,2048,2048,2048,2048,2048,2048,2048,2048,2048,4096,4096,4096,4096,4096]
 
 for x in sizes:
-    a = equalize(bettermarkov(x-1),better(x-1))
+    a = haskemd.equalize(haskemd.mrand(x-1),haskemd.rand(x-1))
     distance_metric=np.load("numpy/mat"+str(x)+".npy")
     data = (haskemd.testemd(a[0],a[1])) + (pyemd.emd(a[0].astype(float), a[1].astype(float), distance_metric),) + (x,)
     with open("data.dat","a") as file:
         file.write(str(data)+"\n")
-    a = equalize(bettermarkov(x-1),better(x-1))
-    distance_metric=np.load("numpy/mat"+str(x)+".npy")
-    data = (haskemd.testemd(a[0],a[1])) + (pyemd.emd(a[0].astype(float), a[1].astype(float), distance_metric),) + (x,)
-    with open("data.dat","a") as file:
-        file.write(str(data)+"\n")
+    print("generated calibration data with "+str(x)+" bins...")

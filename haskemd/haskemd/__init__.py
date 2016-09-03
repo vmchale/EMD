@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.random import randint
+import numpy.random
 import subprocess
 import sys
 from os.path import isfile
@@ -9,11 +10,11 @@ from fractions import Fraction
 
 path = os.environ["HASKPATH"]
 
-def sinksrand(num):
-    return randint(0,num,num,np.uint32)
+def rand(num):
+    return np.random.binomial(num,(1/num),num)
 
-def sourcesrand(num):
-    return randint(0,num,num,np.uint32)
+def mrand(num):
+    return abs(np.cumsum(numpy.random.binomial(2,(1/num),num))).astype(np.uint32)
 
 ## Makes sure that randomly generated sinks and sources both have the same sum
 def equalize(sinks, sources):

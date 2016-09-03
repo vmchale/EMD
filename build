@@ -67,6 +67,7 @@ if ! type "EMD" > /dev/null ; then
 fi
 cd $SCRIPTPATH/haskemd/ && echo "Installing python package..." ; (sudo python3 setup.py install) >> ../build.log && cd ../
 mkdir data/ &> /dev/null
+mkdir calibrate/numpy/ &> /dev/null
 if ! type "nvcc" > /dev/null ; then
     echo "" ; echo "Note that CUDA has not been installed! You will have to install it now"
     echo "Note that CUDA has not been installed! You will have to install it now" &>> build.log
