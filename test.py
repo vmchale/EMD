@@ -1,6 +1,6 @@
 import haskemd
 
-a = haskemd.equalize(haskemd.sinksrand(1023),haskemd.sourcesrand(1023))
+a = haskemd.equalize(haskemd.rand(1023),haskemd.mrand(1023))
 
 print (haskemd.emd(a[0],a[1]))
 print("...test completed sucessfully!")

@@ -25,8 +25,8 @@ if [ ! $BREW_CHECK > /dev/null ] && [ ! $PORTS_CHECK > /dev/null ] && [ "$OSTYPE
     echo "Install brew (to automatically install dependencies)?"
     select yn in "Yes" "No"; do
         case $yn in
-            Yes )     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ; break;;
-            No ) exit;;
+            Yes ) /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ; break;;
+            No ) echo 'Install devIL and imagemagick later...' ; exit;;
         esac
     done
 fi
@@ -37,7 +37,7 @@ BREW_CMD=$(which brew)
 PORTS_CMD=$(which port)
 if [[ ! -z $APT_GET_CMD ]]; then
     echo "installing dependencies with apt-get...."
-    (sudo apt-get install -y libdevil-dev imagemagick nvidia-cuda-dev) &> build.log
+    (sudo apt-get install -y libdevil-dev imagemagick) &> build.log
 elif [[ ! -z $BREW_CMD ]]; then
     brew install devil imagemagick
 elif [[ ! -z $YUM_CMD ]]; then
@@ -72,9 +72,13 @@ if ! type "nvcc" > /dev/null ; then
     echo "" ; echo "Note that CUDA has not been installed! You will have to install it now"
     echo "Note that CUDA has not been installed! You will have to install it now" &>> build.log
 fi
-echo "Python built sucessfully."
-#echo 'binaries built, remove libraries? (y/n) (1.8G)'
-#sudo rm -r ~/.stack/
-#sudo rm -r .stack-work/
+echo "Python package installation finished."
+echo 'binaries built, remove libraries? (1.8G)'
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo rm -r ~/.stack/ ; sudo rm -r .stack-work/ ; break;;
+        No ) exit;;
+    esac
+done
 #echo 'test program now? (y/n)'
 #python3 test.py
