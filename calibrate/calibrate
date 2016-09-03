@@ -3,8 +3,10 @@ rm regression.dat &> /dev/null
 sudo -E env "PATH=$PATH" python3 calibrate.py
 sudo -E env "PATH=$PATH" python3 calibrate.py
 sudo -E env "PATH=$PATH" python3 calibrate.py
+sudo -E env "PATH=$PATH" python3 calibrate.py
+sudo -E env "PATH=$PATH" python3 calibrate.py
 python3 interpret.py 256
 python3 interpret.py 512
 python3 interpret.py 1024
-python3 interpret.py 2038
+python3 interpret.py 2048
 python3 interpret.py 4096

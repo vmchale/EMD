@@ -64,6 +64,13 @@ if ! type "EMD" > /dev/null ; then
     fi
     echo "setting up stack... this may take some time."
     (stack setup &>> build.log ; echo 'stack set up successfully' && stack build && stack install)
+    echo 'binaries built, remove libraries? (1.8G)'
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) sudo rm -r ~/.stack/ ; sudo rm -r .stack-work/ ; break;;
+            No ) exit;;
+        esac
+    done
 fi
 cd $SCRIPTPATH/haskemd/ && echo "Installing python package..." ; (sudo python3 setup.py install) >> ../build.log && cd ../
 mkdir data/ &> /dev/null
@@ -73,12 +80,5 @@ if ! type "nvcc" > /dev/null ; then
     echo "Note that CUDA has not been installed! You will have to install it now" &>> build.log
 fi
 echo "Python package installation finished."
-echo 'binaries built, remove libraries? (1.8G)'
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) sudo rm -r ~/.stack/ ; sudo rm -r .stack-work/ ; break;;
-        No ) exit;;
-    esac
-done
 #echo 'test program now? (y/n)'
 #python3 test.py
