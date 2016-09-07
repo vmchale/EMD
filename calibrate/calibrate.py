@@ -23,6 +23,9 @@ def bettermarkov(num):
 def better(num):
     return numpy.random.binomial(num,(1/num),num)
 
+def skewed(num,peak):
+    return numpy.random.binomial(num*peak,(1/(num*peak)),num)
+
 for x in [256,512,1024,2048,4096]:
     if not isfile("numpy/mat"+str(x)+".npy"):
         print("generating matrix...")
@@ -32,6 +35,24 @@ for x in [256,512,1024,2048,4096]:
 sizes = [256,256,256,256,256,256,256,256,256,256,512,512,512,512,512,512,512,512,512,512,1024,1024,1024,1024,1024,1024,1024,1024,1024,1024,2048,2048,2048,2048,2048,2048,2048,2048,2048,2048,4096,4096,4096,4096,4096]
 
 for x in sizes:
+    a = haskemd.equalize(haskemd.mrand(x-1),skewed(x-1,(1/4)))
+    distance_metric=np.load("numpy/mat"+str(x)+".npy")
+    data = (haskemd.testemd(a[0],a[1])) + (pyemd.emd(a[0].astype(float), a[1].astype(float), distance_metric),) + (x,)
+    with open("data.dat","a") as file:
+        file.write(str(data)+"\n")
+    print("generated calibration data with "+str(x)+" bins...")
+    a = haskemd.equalize(haskemd.rand(x-1),haskemd.rand(x-1))
+    distance_metric=np.load("numpy/mat"+str(x)+".npy")
+    data = (haskemd.testemd(a[0],a[1])) + (pyemd.emd(a[0].astype(float), a[1].astype(float), distance_metric),) + (x,)
+    with open("data.dat","a") as file:
+        file.write(str(data)+"\n")
+    print("generated calibration data with "+str(x)+" bins...")
+    a = haskemd.equalize(haskemd.mrand(x-1),haskemd.rand(x-1))
+    distance_metric=np.load("numpy/mat"+str(x)+".npy")
+    data = (haskemd.testemd(a[0],a[1])) + (pyemd.emd(a[0].astype(float), a[1].astype(float), distance_metric),) + (x,)
+    with open("data.dat","a") as file:
+        file.write(str(data)+"\n")
+    print("generated calibration data with "+str(x)+" bins...")
     a = haskemd.equalize(haskemd.mrand(x-1),haskemd.rand(x-1))
     distance_metric=np.load("numpy/mat"+str(x)+".npy")
     data = (haskemd.testemd(a[0],a[1])) + (pyemd.emd(a[0].astype(float), a[1].astype(float), distance_metric),) + (x,)

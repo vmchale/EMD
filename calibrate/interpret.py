@@ -23,11 +23,11 @@ nodes=table[4]
 
 factor = pyemd/haskemd
 
-fit=np.polyfit(var/np.sqrt(plus), factor, 1)
-r=str(np.corrcoef(var/np.sqrt(plus), factor)[(1,0)])
+fit=np.polyfit(var/(plus), factor, 1)
+r=str(np.corrcoef(var/(plus), factor)[(1,0)])
 with open("regression.dat",'a') as output:
     output.write(str(filt)+" "+str(fit)+" "+r+"\n")
-predict = (var/np.sqrt(plus))*fit[0]+fit[1]
+predict = (var/(plus))*fit[0]+fit[1]
 x = np.linspace(min(var/plus), max(var/plus))
 line = plt.plot(x, x*fit[0]+fit[1], c='red')
 
