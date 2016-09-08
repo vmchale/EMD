@@ -17,7 +17,7 @@ if [ -z $EMD_CHECK ] && [ "$OSTYPE" == "linux-gnu" ] ; then
     mkdir ~/.local/ &> /dev/null
     mkdir ~/.local/bin/ &> /dev/null
     mkdir ~/.accelerate &> /dev/null
-    cp -r .accelerate/* ~/.accelerate/
+#    cp -r .accelerate/* ~/.accelerate/
     cp bin/x86_64-linux/* ~/.local/bin/
 fi
 BREW_CHECK=$(type brew)
