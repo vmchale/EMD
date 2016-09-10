@@ -26,13 +26,13 @@ def better(num):
 def skewed(num,peak):
     return numpy.random.binomial(num*peak,(1/(num*peak)),num)
 
-for x in [256,512,1024,2048,4096]:
+for x in [128,256,512,1024,2048,4096]:
     if not isfile("numpy/mat"+str(x)+".npy"):
         print("generating matrix...")
         distance_metric = np.fromfunction(np.vectorize(ham_dist), (x,x), dtype=int)
         np.save("numpy/mat"+str(x)+".npy",distance_metric)
 
-sizes = [256,256,256,256,256,256,256,256,256,256,512,512,512,512,512,512,512,512,512,512,1024,1024,1024,1024,1024,1024,1024,1024,1024,1024,2048,2048,2048,2048,2048,2048,2048,2048,2048,2048,4096,4096,4096,4096,4096]
+sizes = [128,128,128,128,128,128,128,128,128,128,128,128,256,256,256,256,256,256,256,256,256,256,512,512,512,512,512,512,512,512,512,512,1024,1024,1024,1024,1024,1024,1024,1024,1024,1024,2048,2048,2048,2048,2048,2048,2048,2048,2048,2048,4096,4096,4096,4096,4096]
 
 for x in sizes:
     a = haskemd.equalize(haskemd.mrand(x-1),skewed(x-1,(1/4)))

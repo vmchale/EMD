@@ -2,6 +2,7 @@
 cd $HASKPATH/calibrate
 rm regression.dat &> /dev/null
 sudo -E env "PATH=$PATH" python3 calibrate.py
+python3 interpret.py 128
 python3 interpret.py 256
 python3 interpret.py 512
 python3 interpret.py 1024

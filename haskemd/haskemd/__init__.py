@@ -69,14 +69,15 @@ def emd(list1, list2):
     list2 = mult*list2
     var = np.std(list1-list2)
     nodes = int(np.log2(len(list1)))
-    logmean = np.log2((np.average(list1)+np.average(list2))/2)
+    mean = (np.average(list1)+np.average(list2))/2
+#    logmean = np.log2((np.average(list1)+np.average(list2))/2)
     l1 = tobmp (list1, "list1")
     l2 = tobmp (list2, "list2")
     if not isfile(path+"data/matrix-"+(str(list1.size))+".png"):
         makemat(list1)
     output = haskemd("list1.bmp","list2.bmp","data/matrix-"+(str(list1.size))+".png")
     output = str(output)
-    factor = min(1, np.float64((((2*np.sqrt(2))**(8-logmean))*.000206201*var)+.253198))
+    factor = min(1, np.float64((.02516829*var/mean)+.28805835))
     back = float(''.join(filter(lambda x: x.isdigit(), output)))/float(mult)
     return round(float(factor)*back)
 
